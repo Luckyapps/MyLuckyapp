@@ -1,4 +1,4 @@
-*{
+/**{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -21,7 +21,7 @@ a:hover{
 
 .invisible{
   display: none !important;
-}
+}*/
 
 #wall{
     position:fixed; 

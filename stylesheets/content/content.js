@@ -10,7 +10,7 @@ async function start_content_stylesheet(){
             document.getElementById("content").remove();
             page.innerHTML += content_init;
             content = document.getElementById("content");
-            console.log(content);
+            //console.log(content);
             content.style = "";
             luckyapp_core.modules.content.loaded = true;
         }else{

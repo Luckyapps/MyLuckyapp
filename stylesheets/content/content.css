@@ -1,4 +1,4 @@
-#content{
+/*#content{
     display: grid;
     grid-template-columns: minmax(60%, 100%) auto;
     gap: 10px;
@@ -45,4 +45,4 @@
     ._first{
         grid-area: 1;
     }
-}
+}*/
