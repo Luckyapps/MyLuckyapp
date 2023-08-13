@@ -17,11 +17,50 @@ header{
     width: 90%;
     align-self: center;
     gap: 20px;
+    perspective: 1000px;
 }
 
+/* The flip card container - set the width and height to whatever you want. 
+We have added the border property to demonstrate that the flip itself goes out 
+of the box on hover (remove perspective if you don't want the 3D effect */
 .mLCard{
     background-color: gray;
     border-radius: 20px;
     padding: 15px;
     box-shadow: 0px 0px 12px 2px #000000;
+    text-align: center;
+    transition: transform 0.8s, box-shadow 0.8s;
+    transform-style: preserve-3d;
 }
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+/**/.mLCard:hover{
+    transform: rotateY(180deg);
+    z-index: 999;
+    box-shadow: none;
+}
+
+.mLCardFlipped{
+    transform: rotateY(180deg);
+    z-index: 999;
+    box-shadow: none;
+}
+
+/* Position the front and back side */
+.mLCardFront, .mLCardBack{
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+  
+  /* Style the back side */
+.mLCardBack {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    box-shadow: 0px 0px 12px 2px #000000;
+  }
+
