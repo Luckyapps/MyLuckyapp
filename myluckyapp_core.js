@@ -55,6 +55,7 @@ var myLuckyappCore = {
                     }
                 }
             }
+            this.cardManager.init();
         }else{
             await sleep(100);
             this.loadCardList();
@@ -121,6 +122,34 @@ var myLuckyappCore = {
             }
         }catch(err){
             console.error("[myLuckyapps] Loaderror");
+        }
+    },
+    cardManager: {
+        cards: [],
+        init: function (){
+            var cardList = document.getElementsByClassName("mLCard");
+            for(i=0;i<cardList.length;i++){
+                var card = {
+                    obj: cardList[i],
+                    back: false
+                }
+                if(cardList[i].getElementsByClassName("mLCardBack")[0]){
+                    card.back = true;
+                    var flipHtml = createHTML('<div class="mLCardFlipperFront">🔄️</div>');
+                    cardList[i].insertBefore(flipHtml, cardList[i].getElementsByClassName("mLCardBack")[0]);
+                    cardList[i].getElementsByClassName("mLCardBack")[0].innerHTML += '<div class="mLCardFlipperBack">❌</div>';
+                    cardList[i].getElementsByClassName("mLCardFlipperFront")[0].addEventListener("click",(evt)=>{myLuckyappCore.cardManager.flipToBack(evt.target.offsetParent)});
+                    cardList[i].getElementsByClassName("mLCardBack")[0].getElementsByClassName("mLCardFlipperBack")[0].addEventListener("click",(evt)=>{myLuckyappCore.cardManager.flipToFront(evt.target.offsetParent.offsetParent)});
+                }
+                console.log(card);
+                myLuckyappCore.cardManager.cards.push(card);
+            }
+        },
+        flipToBack: function(obj){
+            obj.classList.add("mLCardFlipped");
+        },
+        flipToFront: function(obj){
+            obj.classList.remove("mLCardFlipped");
         }
     }
 }

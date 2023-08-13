@@ -31,14 +31,16 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     text-align: center;
     transition: transform 0.8s, box-shadow 0.8s;
     transform-style: preserve-3d;
+    /*-webkit-backface-visibility: hidden; /* Safari */
+    /*backface-visibility: hidden;*/
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-/**/.mLCard:hover{
+/*.mLCard:hover{
     transform: rotateY(180deg);
     z-index: 999;
     box-shadow: none;
-}
+}*/
 
 .mLCardFlipped{
     transform: rotateY(180deg);
@@ -60,7 +62,23 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    min-height: 100%;
     border-radius: 20px;
     box-shadow: 0px 0px 12px 2px #000000;
-  }
+}
 
+.mLCardFlipperFront{
+    font-size: 1.5em;
+    position:absolute;
+    top:5px;
+    right:5px;
+    cursor:pointer;
+}
+
+.mLCardFlipperBack{
+    position:absolute;
+    top:5px;
+    right:5px;
+    cursor:pointer;
+}
