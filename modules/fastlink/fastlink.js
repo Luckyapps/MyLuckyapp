@@ -5,9 +5,9 @@ async function start_fastlink_module(){ //html embed
             ready_to_load = true;
             var html_content = '<div class="mLCard fastlinkCard">'
                                     +'<a href="https://luckyapps.github.io/Musik/"><img src="images/musik.png"></img><span>Luckyapp Musik</span></a>'
-                                    +'<a href=""><img src="images/corona.png"></img></a>'
-                                    +'<a href=""><img src="images/minecraft.png"></img></a>'
-                                    +'<a href=""><img src="images/corona.png"></img></a>'
+                                    +'<a href="https://luckyapps.github.io/nasa/"><img src="images/NASA_logo.svg"></img><span>Nasa</span></a>'
+                                    +'<a href="https://luckyapps.github.io/Luckyapp/"><img src="images/icons/icon-512x512.png"></img><span>Luckyapp Home</span></a>'
+                                    +'<a href="https://luckyapps.github.io/games/"><img src="images/minecraft.png"></img><span>Games</span></a>'
 
                                     +'<div class="mLCardBack">'
                                         +'<h3>Settings</h3>'
