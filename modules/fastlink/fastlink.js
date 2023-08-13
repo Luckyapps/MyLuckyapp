@@ -8,6 +8,10 @@ async function start_fastlink_module(){ //html embed
                                     +'<a href=""><img src="images/corona.png"></img></a>'
                                     +'<a href=""><img src="images/minecraft.png"></img></a>'
                                     +'<a href=""><img src="images/corona.png"></img></a>'
+
+                                    +'<div class="mLCardBack">'
+                                        +'<h3>Settings</h3>'
+                                    +'</div>'
                                 +'</div>';
             html_content = await createHTML(html_content);
             myLuckyappCore.modules.fastlink.html = html_content;

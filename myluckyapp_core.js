@@ -1,8 +1,11 @@
 async function initMyLuckyapp(){
     if(luckyapp_core.loaded){
         await myLuckyappCore.loadSettings();
+        luckyapp_core.load_check();
         await myLuckyappCore.initModules();
-        myLuckyappCore.loadCardList();
+        luckyapp_core.load_check();
+        await myLuckyappCore.loadCardList();
+        luckyapp_core.load_check();
     }else{
         await sleep(100);
         initMyLuckyapp();
@@ -55,7 +58,7 @@ var myLuckyappCore = {
                     }
                 }
             }
-            this.cardManager.init();
+            await this.cardManager.init();
         }else{
             await sleep(100);
             this.loadCardList();
@@ -141,7 +144,6 @@ var myLuckyappCore = {
                     cardList[i].getElementsByClassName("mLCardFlipperFront")[0].addEventListener("click",(evt)=>{myLuckyappCore.cardManager.flipToBack(evt.target.offsetParent)});
                     cardList[i].getElementsByClassName("mLCardBack")[0].getElementsByClassName("mLCardFlipperBack")[0].addEventListener("click",(evt)=>{myLuckyappCore.cardManager.flipToFront(evt.target.offsetParent.offsetParent)});
                 }
-                console.log(card);
                 myLuckyappCore.cardManager.cards.push(card);
             }
         },

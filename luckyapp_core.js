@@ -230,6 +230,11 @@ var luckyapp_core = {
                 luckyapp_core.loaded = true;
                 console.warn("Fertig geladen");
             }
+        }else if(load_status >= (loaded_modules_count-myLuckyapp_loadpoints)){
+            if(!luckyapp_core.loaded){
+                luckyapp_core.loaded = true;
+                console.warn("luckyappCore geladen");
+            }
         }
     },
     load_error: function(event, message){
@@ -253,9 +258,10 @@ window.addEventListener("load", load_luckyapp_core);
 
 window.addEventListener("error", luckyapp_core.load_error);
 
-var loaded_modules_count = 0, load_status = 0;
+var loaded_modules_count = 0, load_status = 0, myLuckyapp_loadpoints = 3//Anzahl Ladepunkte myLuckyapp;
 
 function load_luckyapp_core(){
+    loaded_modules_count += myLuckyapp_loadpoints; 
     document.getElementById("page_config_script").remove();
     load_meta();
     /*if(!luckyapp_core.page_config.modules.preset.active){
