@@ -29,6 +29,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     padding: 15px;
     box-shadow: 0px 0px 12px 2px #000000;
     text-align: center;
+    -webkit-transition: transform 0.8s, box-shadow 0.8s;
     transition: transform 0.8s, box-shadow 0.8s;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
@@ -44,6 +45,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
 }*/
 
 .mLCardFlipped{
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     z-index: 999;
     box-shadow: none;
@@ -59,8 +61,9 @@ of the box on hover (remove perspective if you don't want the 3D effect */
 .mLCardBack {
     background-color: dodgerblue;
     color: white;
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    /*position: absolute;*/
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
