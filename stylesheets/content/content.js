@@ -11,7 +11,7 @@ async function start_content_stylesheet(){
             page.innerHTML += content_init;
             content = document.getElementById("content");
             //console.log(content);
-            conte nt.style = "";
+            content.style = "";
             luckyapp_core.modules.content.loaded = true;
         }else{
             if((luckyapp_core.modules.header.active && luckyapp_core.modules.navbar.active)){
