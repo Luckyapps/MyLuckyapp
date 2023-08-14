@@ -48,7 +48,6 @@ of the box on hover (remove perspective if you don't want the 3D effect */
 .mLCardFlipped{
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    z-index: 999;
     box-shadow: none;
 }
 
