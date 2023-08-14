@@ -49,7 +49,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
 }
 
 /* Position the front and back side */
-.mLCardFront, .mLCardBack{
+.mLCardBack{
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
 }

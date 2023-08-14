@@ -2,6 +2,13 @@ var updatelist_luckyapp = {
     "source": "Luckyapp",
     "content": [ 
         {
+            id: "dv.1.23083.1",
+            title: "myLuckyapp Update 3|aug23",
+            name:"",
+            date: "14.08.2023",
+            type: "BUGFIX",
+            description: "<ul><li>Safari Bugfix</li></ul>"
+        },{
             id: "dv.1.23083.0",
             title: "myLuckyapp Update 3|aug23",
             name:"Ladesystem",
