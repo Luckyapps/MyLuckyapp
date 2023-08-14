@@ -167,6 +167,7 @@ var luckyapp_core = {
                 }
             }
         },
+        header: {active:false},
         window_bar: {
             active: true,
             files: {
