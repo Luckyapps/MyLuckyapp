@@ -244,7 +244,7 @@ var luckyapp_core = {
                 error_show("Ein Fehler ist aufgetreten. Bitte überprüfe deine Internetverbindung. Sollte das Problem dadurch nicht behoben werden, bitte <a href='mailto:thebuissnesscreeper@gmail.com?subject=Luckyapp Fehlermeldung&amp;body="+ event.message +"%0A%0A"+ event.error.message +"%0A%0A"+ event.error.stack +"'>das Problem Melden</a>");
             }catch{};
             console.error("[LUCKYAPP LOAD ERROR Message] "+ message);
-            document.getElementById("ball_container").innerHTML += "<p style='color:red; font-family: calibri; text-align:center'>Ein Fehler ist aufgetreten</p>"
+            document.getElementById("ball_container").innerHTML += "<p style='color:red; font-family: calibri; text-align:center'>Ein Fehler ist aufgetreten: "+ message +"</p>"
             +"<p style='font-family: calibri; color:white; text-align:center'>Sie können das Laden der Seite erzwingen (die Seite ist dann unvollständig geladen) </p><button style='cursor:pointer' onclick='luckyapp_core.load_check(); console.warn(`Die Seite wird zwangsweise angezeigt`)'>Hier drücken, um die Seite zwangsweise zu laden.</button>";
         }else{
             //error_show("Ein Fehler ist aufgetreten: "+ message);
