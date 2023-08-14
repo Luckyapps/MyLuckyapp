@@ -33,6 +33,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     transition: transform 0.8s, box-shadow 0.8s;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    z-index: 0;
     /*-webkit-backface-visibility: hidden; /* Safari */
     /*backface-visibility: hidden;*/
 }
@@ -70,6 +71,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     min-height: 100%;
     border-radius: 20px;
     box-shadow: 0px 0px 12px 2px #000000;
+    z-index: 1;
 }
 
 .mLCardFlipperFront{
