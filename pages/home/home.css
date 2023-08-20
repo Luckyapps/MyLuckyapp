@@ -63,7 +63,7 @@ of the box on hover (remove perspective if you don't want the 3D effect */
     color: white;
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    /*position: absolute;*/
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

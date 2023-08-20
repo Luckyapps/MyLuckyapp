@@ -1,15 +1,22 @@
 async function initMyLuckyapp(){
-    if(luckyapp_core.loaded){
-        await myLuckyappCore.loadSettings();
-        luckyapp_core.load_check();
-        await myLuckyappCore.initModules();
-        luckyapp_core.load_check();
-        await myLuckyappCore.loadCardList();
-        luckyapp_core.load_check();
-    }else{
-        await sleep(100);
-        initMyLuckyapp();
+    for(i=1;i>0;i++){
+        if(luckyapp_core.loaded){
+            console.log("Starting")
+            await myLuckyappCore.loadSettings();
+            luckyapp_core.load_check();
+            await myLuckyappCore.initModules();
+            luckyapp_core.load_check();
+            await myLuckyappCore.loadCardList();
+            luckyapp_core.load_check();
+            await myLuckyappCore.initModuleFunctions();
+            luckyapp_core.load_check();
+            console.log("danach");
+            break;
+        }else{
+            await sleep(100);
+        }
     }
+    console.warn("[myLuckyappCore] Ladevorgang abgeschlossen");
 }
 
 var storageName = "myLuckyappSettings";
@@ -20,10 +27,12 @@ var myLuckyappCore = {
     loaded:false,
     version: "1",
     cardList: [],
+    moduleFunctions:[],
     settings: {
-        settingsVersion: 1,
+        settingsVersion: 2,
         cardList: [
-            "fastlink"
+            "fastlink",
+            "hangman"
         ],//Liste der Ids der Karten, die angezeigt werden sollen.
     },
     loadCheck: function(){
@@ -46,23 +55,42 @@ var myLuckyappCore = {
             this.saveSettings();
         }
     },
+    loadCardList_count:0,
     loadCardList: async function(){
-        if(this.loaded){
-            this.cardList = this.settings.cardList;
-            for(i=0;i<this.cardList.length;i++){
-                if(this.modules[this.cardList[i]].loaded){
-                    if(this.modules[this.cardList[i]].html){
-                        document.getElementById("cardContainer").appendChild(this.modules[this.cardList[i]].html);
-                    }else{
-                        error_show("[MyLuckyapp LoadCardList] Module " +this.cardList[i] +" stellt keine Card zur Verfügung.");
+        //console.log("loadCardList");
+        return new Promise(async(resolve)=>{
+            //console.log("loadCardListPromise");
+            var maxLoadCount = 10;
+            for(lc=0;lc<maxLoadCount+1;lc++){
+                //console.log(lc);
+                //console.log("start cyclye"+lc);
+                if(this.loaded||lc == maxLoadCount){
+                    lc=maxLoadCount;
+                    if(!this.loaded){
+                        load_status--;
+                        luckyapp_core.load_error(undefined, "loadCardList error: Möglicherweise kann eine Moduldatei nicht geladen werden.")
                     }
+                    this.cardList = this.settings.cardList;
+                    for(i=0;i<this.cardList.length;i++){
+                        if(this.modules[this.cardList[i]].loaded){
+                            if(this.modules[this.cardList[i]].html){
+                                document.getElementById("cardContainer").appendChild(this.modules[this.cardList[i]].html);
+                            }else{
+                                error_show("[MyLuckyapp LoadCardList] Module " +this.cardList[i] +" stellt keine Card zur Verfügung.");
+                            }
+                        }
+                    }
+                    //console.log("ausgeführt");
+                    await this.cardManager.init();
+                    resolve("result");
+                }else{
+                    //console.log("before sleep"+lc);
+                    await sleep(300);
+                    //console.log("after sleep"+lc);
                 }
+                //console.log("end cycle"+lc);
             }
-            await this.cardManager.init();
-        }else{
-            await sleep(100);
-            this.loadCardList();
-        }
+        });
     },
     insertCard: async function(html_string){
         var htmlContent = await createHTML(html_string);
@@ -81,6 +109,7 @@ var myLuckyappCore = {
             }, //Dateien
             start: async function(){
                 //zu startende Funktionen hier einfügen
+                console.log("template");
                 myLuckyappCore.loadCheck();
             }
         },
@@ -92,13 +121,28 @@ var myLuckyappCore = {
             }, //Dateien
             start: async function(){
                 //zu startende Funktionen hier einfügen
+                console.log("fastlink");
                 await start_fastlink_module();
+                myLuckyappCore.loadCheck();
+            }
+        },
+        hangman:{
+            active: true,
+            files: {
+                js:["modules/hangman/hangman.js"],
+                css:["modules/hangman/hangman.css"]
+            },
+            functions: ["hangman_init"],
+            start: async function(){
+                console.log("hangman");
+                await start_hangman_module();
                 myLuckyappCore.loadCheck();
             }
         }
     },
     initModules: async function(){
         try{
+            console.log("initModules");
             var modulesList = Object.keys(this.modules);
             for(i=0;i<modulesList.length;i++){
                 var modName = modulesList[i];
@@ -113,23 +157,39 @@ var myLuckyappCore = {
                             }else{
                                 var callback = undefined;
                             }
-                            scriptLoader(module.files.js[j], callback);
+                            await scriptLoader(module.files.js[j], callback);
                         }
                     }
                     if(module.files.css){
                         for(j=0;j<module.files.css.length;j++){
-                            cssLoader(module.files.css[j]);
+                            await cssLoader(module.files.css[j]);
                         }
+                    }
+                    if(module.functions){
+                        this.moduleFunctions.push(module.functions);
+                        console.log(this.moduleFunctions);
                     }
                 }
             }
+            console.log("initModules ended");
         }catch(err){
             console.error("[myLuckyapps] Loaderror");
         }
     },
+    initModuleFunctions: async function(){
+        return new Promise(async (resolve)=>{
+            try{
+                this.moduleFunctions.forEach((elem)=>{luckyapp_core.modules.fileloader.load(elem)});
+            }catch(err){
+                console.log(err);
+            }
+            resolve();
+        });
+    },
     cardManager: {
         cards: [],
         init: function (){
+            //console.log("initCardManager");
             var cardList = document.getElementsByClassName("mLCard");
             for(i=0;i<cardList.length;i++){
                 var card = {

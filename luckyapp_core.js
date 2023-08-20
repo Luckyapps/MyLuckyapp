@@ -259,7 +259,7 @@ window.addEventListener("load", load_luckyapp_core);
 
 //window.addEventListener("error", luckyapp_core.load_error);
 
-var loaded_modules_count = 0, load_status = 0, myLuckyapp_loadpoints = 3//Anzahl Ladepunkte myLuckyapp;
+var loaded_modules_count = 0, load_status = 0, myLuckyapp_loadpoints = 4//Anzahl Ladepunkte myLuckyapp;
 
 function load_luckyapp_core(){
     loaded_modules_count += myLuckyapp_loadpoints; 

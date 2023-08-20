@@ -1,14 +1,14 @@
-async function start_fastlink_module(){ //html embed
+async function start_xxxxx_module(){ //html embed
     var ready_to_load = false;
     for(i=0; ready_to_load != true;i++){
         if(luckyapp_core.modules.content.loaded){ //Bedingung für Ausführung
             ready_to_load = true;
             var html_content = '';
             html_content = await createHTML(html_content);
-            myLuckyappCore.modules.fastlink.html = html_content; //Hier name ändern (F2 Taste?)
+            myLuckyappCore.modules.xxxxx.html = html_content; //Hier name ändern (F2 Taste?)
             //document.body.appendChild(html_content);
             //document.getElementById("cardContainer").appendChild(html_content);
-            myLuckyappCore.modules.fastlink.loaded = true; //Hier name ändern
+            myLuckyappCore.modules.xxxxx.loaded = true; //Hier name ändern
         }else{
             await sleep(1);
             if(i==100){
