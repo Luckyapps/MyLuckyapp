@@ -1,0 +1,18 @@
+{
+    "classes":{
+        "mLCard":{
+            "classes":{
+                "add":["mLCard_dark"],
+                "remove":[]
+            }
+        }
+    },
+    "ids":{},
+    "tags":{
+        "body":{
+            "classes":{
+                "add":["dm_body"]
+            }
+        }
+    }
+}

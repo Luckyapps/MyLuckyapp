@@ -3,7 +3,9 @@ async function start_xxxxx_module(){ //html embed
     for(i=0; ready_to_load != true;i++){
         if(luckyapp_core.modules.content.loaded){ //Bedingung für Ausführung
             ready_to_load = true;
-            var html_content = '';
+            var html_content = '<div class="mLCard ">'
+
+                    	       '</div>';
             html_content = await createHTML(html_content);
             myLuckyappCore.modules.xxxxx.html = html_content; //Hier name ändern (F2 Taste?)
             //document.body.appendChild(html_content);
@@ -43,3 +45,5 @@ async function start_xxxxx_stylesheet(){ //no html embed
         }
     }
 }
+
+function testing(){} //Programmfunktionen

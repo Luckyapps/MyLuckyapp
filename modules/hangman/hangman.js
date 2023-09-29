@@ -72,12 +72,11 @@ function hangman_init(){
         var ausgabe = "";
         for(i=0;i<eingabe.length;i++){
           if(eingabe.substr(i, 1) == " "){
-            if(eingabe.substr(i-1, 1) == ","){
-            }else{
+            if(eingabe.substr(i-1, 1) != ","){
               ausgabe += "<div style='color: yellow'>|</div>";
             }
           }else if(eingabe.substr(i, 1) == ","){
-            ausgabe += "<div style='color:green'>,</div>"
+            ausgabe += "<div style='color:green'>,</div>";
           }else if(eingabe.substr(i, 1).length === 1 && eingabe.substr(i, 1).match(/[a-z | ß | ü | ä | ö]/i)){
             /*if(hangman.guessed.correct.forEach(function(src){if(src == eingabe.substr(i,1)){return true}else{return false};})){
               console.error("part of it");
@@ -100,6 +99,7 @@ function hangman_init(){
             }
           }else{
             console.log("NOLETTER");
+            ausgabe += "<div style='color:green'>"+eingabe.substr(i,1)+"</div>";
           }
         }
         hangman.output.innerHTML += "<div class='hangman_output'>"+ ausgabe +"</div>";

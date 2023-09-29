@@ -15,6 +15,11 @@ async function initMyLuckyapp(){
         }else{
             await sleep(100);
         }
+        console.log(i);
+        if(i==100){
+            console.error("[MyLuckyappCore] Fatal Error: System kann nicht geladen werden.");
+            luckyapp_core.load_error(undefined, "MyLuckyapp kann nicht geladen werden.");
+        }
     }
     console.warn("[myLuckyappCore] Ladevorgang abgeschlossen");
 }
@@ -28,8 +33,10 @@ var myLuckyappCore = {
     version: "1",
     cardList: [],
     moduleFunctions:[],
+    updateOnSettingsChange:[], //Funktionen, die aufgerufen werden wenn die Einstellungen geändert werden. (nur über myLuckyappCore.settingChange())
     settings: {
-        settingsVersion: 2,
+        settingsVersion: 3,
+        darkmode: false, //Zum ändern darkmode.activate/() oder deactivate() verwenden
         cardList: [
             "fastlink",
             "hangman"
@@ -54,6 +61,24 @@ var myLuckyappCore = {
         }else{
             this.saveSettings();
         }
+    },
+    changeSetting: async function(setting, value){
+        if(localStorage.getItem(storageName)){
+            try{
+                myLuckyappCore.settings[setting] = value;
+                this.saveSettings();
+                this.loadFunctions(this.updateOnSettingsChange);
+            }catch(err){
+                console.warn(`unable to change setting ${setting} to value ${value}`);
+            }
+        }
+    },
+    saveSettings: function(){
+        localStorage.setItem(storageName, JSON.stringify(this.settings));
+        return true;
+    },
+    loadFunctions: function(array){
+        array.forEach((elem)=>{luckyapp_core.modules.fileloader.load(elem)});
     },
     loadCardList_count:0,
     loadCardList: async function(){
@@ -97,16 +122,26 @@ var myLuckyappCore = {
         document.getElementById("cardContainer").appendChild(htmlContent);
         return true;
     },
-    saveSettings: function(){
-        localStorage.setItem(storageName, JSON.stringify(this.settings));
-        return true;
-    },
     modules: { //Module sind Funktionen, die in die Website eingebaut werden können. Modules stellen auch die Cards bereit.
         name1:{ //id des Modules
             active: true,
             files: {
                 js:["modules/template.js"]
             }, //Dateien
+            functions: ["testing"], //Funktion, die nach vollständigem Laden ausgeführt wird
+            start: async function(){
+                //zu startende Funktionen hier einfügen
+                console.log("template");
+                myLuckyappCore.loadCheck();
+            }
+        },
+        darkmode:{ //id des Modules
+            active: true,
+            files: {
+                js:["modules/darkmode/darkmode.js"],
+                css:["modules/darkmode/darkmode.css"]
+            }, //Dateien
+            functions: ["init_darkmode"],
             start: async function(){
                 //zu startende Funktionen hier einfügen
                 console.log("template");

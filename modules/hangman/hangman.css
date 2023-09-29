@@ -1,0 +1,16 @@
+.hangman_output{
+    display:flex;
+    flex-wrap: wrap;
+    gap:1em;
+    margin: 10px 0 10px 0;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.hangman_header {
+    margin: 0 0 10px 0;
+    text-decoration: underline;
+}

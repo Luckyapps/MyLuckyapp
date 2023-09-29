@@ -2,6 +2,13 @@ var updatelist_luckyapp = {
     "source": "Luckyapp",
     "content": [ 
         {
+            id: "dv.1.23091.0",
+            title: "myLuckyapp Update 1|sep23",
+            name:"",
+            date: "29.09.2023",
+            type: "UPDATE",
+            description: "<ul><li>Darkmode <ul><li>Neues Darkmode Modul wurde hinzugefügt.</li><li>In der darkmodeConfig.json kann der Darkmode konfiguriert werden.</li><li>Der Darkmode kann in der Benutzeroberfläche über den neuen Button oben rechts gestuert werden.</li><li>In der darkmode.css können klassen für den Darkmode definiert werden.</li></ul></li><li>myLuckyappCore <ul><li>Settings <ul><li>Neue Darkmode Einstellung</li><li>Ändern einer Einstellung über myLuckyappCore.changeSetting(setting, value) möglich.</li><li>Über updateOnSettingsChange können Funktionen angegeben werden, die nach dem ändern einer Einstellung über myLuckyappCore.changeSetting() ausgeführt werden sollen.</li></ul></li><li>Sonstiges <ul><li>Transparenz: Nach 100 erfolglosen Ladeversuchen wird eine Ladefehlermeldung angezeigt.</li><li>Neue Funktion myLuckyappCore.loadFunctions(array) kann Funktionen ausführen.</li></ul></li></ul></li><li>Hangman <ul><li>Output Design Fix</li><li>Unbekannte (nicht erratbare) Zeichen werden jetzt in grün angezeigt.</li></ul></li></ul>"
+        },{
             id: "dv.1.23084.0",
             title: "myLuckyapp Update 4|aug23",
             name:"",
