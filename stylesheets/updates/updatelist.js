@@ -2,6 +2,13 @@ var updatelist_luckyapp = {
     "source": "Luckyapp",
     "content": [ 
         {
+            id: "dv.1.23092.0",
+            title: "myLuckyapp Update 2|sep23",
+            name:"",
+            date: "29.09.2023",
+            type: "UPDATE",
+            description: "<ul><li>Erster Entwurf der Sidebar</li></ul>"
+        },{
             id: "dv.1.23091.0",
             title: "myLuckyapp Update 1|sep23",
             name:"",

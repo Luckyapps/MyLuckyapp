@@ -142,8 +142,12 @@ var luckyapp_core = {
             files: page_config_init.modules.fileloader.files,
             exec_time:0,
             load: async function(funcname){
-                window[funcname]();
-                console.warn("[Luckyapp_core.modules.fileloader] '"+ funcname +"()' geladen.");
+                if(funcname!=""){
+                    window[funcname]();
+                    console.warn("[Luckyapp_core.modules.fileloader] '"+ funcname +"()' geladen.");
+                }else{
+                    console.warn("[Luckyapp_core.modules.fileloader] Kein Funktionsname verfügbar");
+                }
             },
             start: async function(){
                 var funclist = luckyapp_core.page_config.modules.fileloader.functions;

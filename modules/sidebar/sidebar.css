@@ -1,0 +1,82 @@
+:root{
+    --sidebar-width-closed: 10%;
+    --sidebar-width-opened: 80%;
+}
+
+#sidebarContainer{
+    position:fixed;
+    top:0;
+    height: 100%;
+    background-color: #8c8c8c75;
+    transition: left ease-in-out 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    width: calc(100% - (100% - var(--sidebar-width-opened)));
+    backdrop-filter: blur(12px);
+    box-shadow: 0px 0px 10px 0px #000000;
+}
+
+.sidebarOpen{
+    left: calc(100% - var(--sidebar-width-opened));
+    z-index: 999;
+}
+
+.sidebarClosed{
+    left: calc(100% - var(--sidebar-width-closed));
+}
+
+#sidebarSettings{
+    background-color: #b3e481;
+    position:absolute;
+    width: calc(100% - 2 * var(--settingsBut-padding));
+    --settingsBut-padding:10px;
+    padding:var(--settingsBut-padding);
+    text-align: center;
+    transition: top ease-in-out 0.5s, min-height ease-in-out .2s;
+    backdrop-filter: blur(9px);
+    box-shadow: 0px 0px 10px 0px #000000;
+    color:black;
+}
+
+#sidebarSettings h3{
+    margin:0;
+    height: 1em;
+}
+
+.sidebarSettingsClosed{
+    top: calc(100% - 2 * var(--settingsBut-padding) - 1em);
+    min-height: 50%;
+}
+
+.sidebarSettingsOpen{
+    top:0;
+    min-height: 100%;
+}
+
+#sidebarLinksContainer{
+    width: calc(100% - 2 * var(--sidebarLinksContainer-padding));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--sidebarLinksContainer-padding) 0 var(--sidebarLinksContainer-padding);
+    --sidebarLinksContainer-padding: 20px;
+}
+
+#linkContainer{
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#linkContainer a{
+    color: black;
+}
+
+.darkmode_toggle{
+    /*position:absolute;
+    top:10px;
+    right:10px;*/
+    cursor:pointer;
+    width: 60px;
+}

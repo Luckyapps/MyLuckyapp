@@ -144,7 +144,21 @@ var myLuckyappCore = {
             functions: ["init_darkmode"],
             start: async function(){
                 //zu startende Funktionen hier einfügen
-                console.log("template");
+                console.log("darkmode");
+                myLuckyappCore.loadCheck();
+            }
+        },
+        sidebar:{ //id des Modules
+            active: true,
+            files: {
+                js:["modules/sidebar/sidebar.js"],
+                css:["modules/sidebar/sidebar.css"]
+            }, //Dateien
+            functions: ["init_sidebar"], //Funktion, die nach vollständigem Laden ausgeführt wird
+            start: async function(){
+                //zu startende Funktionen hier einfügen
+                start_sidebar_stylesheet();
+                console.log("sidebar");
                 myLuckyappCore.loadCheck();
             }
         },
