@@ -35,12 +35,13 @@ var myLuckyappCore = {
     moduleFunctions:[],
     updateOnSettingsChange:[], //Funktionen, die aufgerufen werden wenn die Einstellungen geändert werden. (nur über myLuckyappCore.settingChange())
     settings: {
-        settingsVersion: 3,
+        settingsVersion: 6,
         darkmode: false, //Zum ändern darkmode.activate/() oder deactivate() verwenden
         cardList: [
             "fastlink",
             "hangman"
         ],//Liste der Ids der Karten, die angezeigt werden sollen.
+        modules: {}, //Einstellungen der Module werden hier gespeichert
     },
     loadCheck: function(){
         this.loadCheckCount++;
@@ -60,6 +61,13 @@ var myLuckyappCore = {
             }
         }else{
             this.saveSettings();
+        }
+        try{
+            for(i=0;i<Object.keys(myLuckyappCore.settings.modules).length;i++){
+                myLuckyappCore.modules[Object.keys(myLuckyappCore.settings.modules)[i]].settings = myLuckyappCore.settings.modules[Object.keys(myLuckyappCore.settings.modules)[i]];
+            }
+        }catch(err){
+            console.log(err);
         }
     },
     changeSetting: async function(setting, value){
@@ -99,7 +107,9 @@ var myLuckyappCore = {
                     for(i=0;i<this.cardList.length;i++){
                         if(this.modules[this.cardList[i]].loaded){
                             if(this.modules[this.cardList[i]].html){
-                                document.getElementById("cardContainer").appendChild(this.modules[this.cardList[i]].html);
+                                this.modules[this.cardList[i]].html.id = this.cardList[i] +"_mLaID"; // modul-id + _myLuckyapp ID
+                                console.log(this.modules[this.cardList[i]]);
+                                await document.getElementById("cardContainer").appendChild(this.modules[this.cardList[i]].html);
                             }else{
                                 error_show("[MyLuckyapp LoadCardList] Module " +this.cardList[i] +" stellt keine Card zur Verfügung.");
                             }
@@ -122,6 +132,27 @@ var myLuckyappCore = {
         document.getElementById("cardContainer").appendChild(htmlContent);
         return true;
     },
+    getModuleSettings: function(moduleId){
+        try{
+            return myLuckyappCore.settings.modules[moduleId];
+        }catch(err){
+            console.warn(`Einstellungen von ${moduleId} konnten nicht geladen werden.`);
+            return false;
+        }
+    },
+    setModuleSetting: function(moduleId, key, value){
+        try{
+            if(typeof myLuckyappCore.settings.modules[moduleId] == "undefined"){
+                myLuckyappCore.settings.modules[moduleId] = {};
+            }
+            myLuckyappCore.settings.modules[moduleId][key] = value;
+            this.saveSettings();
+            myLuckyappCore.modules[moduleId].settings = myLuckyappCore.settings.modules[moduleId];
+            return myLuckyappCore.settings.modules[moduleId];
+        }catch(err){
+            console.log(err);
+        }
+    },
     modules: { //Module sind Funktionen, die in die Website eingebaut werden können. Modules stellen auch die Cards bereit.
         name1:{ //id des Modules
             active: true,
@@ -133,7 +164,8 @@ var myLuckyappCore = {
                 //zu startende Funktionen hier einfügen
                 console.log("template");
                 myLuckyappCore.loadCheck();
-            }
+            },
+            name: "" //Anzeigename für Linklist in der Sidebar
         },
         darkmode:{ //id des Modules
             active: true,
@@ -168,12 +200,14 @@ var myLuckyappCore = {
                 js:["modules/fastlink/fastlink.js"],
                 css:["modules/fastlink/fastlink.css"]
             }, //Dateien
+            functions: ["init_fastlink"],
             start: async function(){
                 //zu startende Funktionen hier einfügen
                 console.log("fastlink");
                 await start_fastlink_module();
                 myLuckyappCore.loadCheck();
-            }
+            },
+            name: "Fastlink",
         },
         hangman:{
             active: true,
@@ -186,7 +220,8 @@ var myLuckyappCore = {
                 console.log("hangman");
                 await start_hangman_module();
                 myLuckyappCore.loadCheck();
-            }
+            },
+            name: "Hangman"
         }
     },
     initModules: async function(){

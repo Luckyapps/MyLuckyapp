@@ -111,7 +111,7 @@ async function init_darkmode(){
     deactivate: async ()=>{
         myLuckyappCore.changeSetting("darkmode", false);
         for(i=0;i<document.getElementsByClassName("darkmode_toggle").length;i++){ //In ButtonToggle function?
-            document.getElementsByClassName("darkmode_toggle")[i].src= await getAbsoluteLink("images/Theme_Symbol2.png");
+            document.getElementsByClassName("darkmode_toggle")[i].src= await getAbsoluteLink("/images/Theme_Symbol2.png");
         }
         var config = await get_data("darkmodeConfig.json");
         for(i=0;i<Object.keys(config).length;i++){
@@ -243,6 +243,9 @@ async function get_data(url, noinfo){
 }
 
 async function getAbsoluteLink(link){
+    if(window.location.origin=="https://luckyapps.github.io"){
+        return window.location.origin +"/MyLuckyapp/"+ link;
+    }
     if(window.location.origin != "file://"){
         return window.location.origin +"/"+ link;
     }

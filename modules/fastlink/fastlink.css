@@ -22,3 +22,18 @@
 .fastlinkCard img{
     max-width: 100%;
 }
+
+.flSetting{
+    display: flex;
+    padding: 5px;
+}
+
+.flDisplaySettings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h4{
+    margin: auto 0 10px 0;
+}

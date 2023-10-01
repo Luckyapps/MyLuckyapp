@@ -23,7 +23,7 @@ myLuckyappCore.sidebar = {
     toggle: function(evt){
         if(myLuckyappCore.sidebar.opened){
             if(evt.srcElement != document.getElementById("sidebarSettings") && evt.srcElement.offsetParent != document.getElementById("sidebarSettings")){ //Ausnahmen
-                console.log(evt);
+                //console.log(evt);
                 myLuckyappCore.sidebar.close();
             }else{
                 myLuckyappCore.sidebar.settings.toggle(evt);
@@ -34,13 +34,13 @@ myLuckyappCore.sidebar = {
     },
     open: function(){
         myLuckyappCore.sidebar.opened = true;
-        document.getElementById("sidebarContainer").classList.remove("sidebarClosed");
-        document.getElementById("sidebarContainer").classList.add("sidebarOpen");
+        sidebarContainer.classList.remove("sidebarClosed");
+        sidebarContainer.classList.add("sidebarOpen");
     },
     close: function(){
         myLuckyappCore.sidebar.opened = false;
-        document.getElementById("sidebarContainer").classList.remove("sidebarOpen");
-        document.getElementById("sidebarContainer").classList.add("sidebarClosed");
+        sidebarContainer.classList.remove("sidebarOpen");
+        sidebarContainer.classList.add("sidebarClosed");
     },
     settings: {
         opened:false,
@@ -63,9 +63,22 @@ myLuckyappCore.sidebar = {
             document.getElementById("sidebarSettings").classList.remove("sidebarSettingsOpen");
             document.getElementById("sidebarSettings").classList.add("sidebarSettingsClosed");
         }
+    },
+    loadLinklist: function(){
+        var linkContainer = document.getElementById("linkContainer");
+        linkContainer.innerHTML = "";
+        for(i=0;i<myLuckyappCore.cardList.length;i++){
+            if(myLuckyappCore.modules[myLuckyappCore.cardList[i]].name){
+                var name = myLuckyappCore.modules[myLuckyappCore.cardList[i]].name;
+            }else{
+                var name = myLuckyappCore.cardList[i];
+            }
+            linkContainer.innerHTML += "<a href='#"+ myLuckyappCore.cardList[i] +"_mLaID'>"+ name +"</a>";
+        }
     }
 }
 
 function init_sidebar(){
-    document.getElementById("sidebarContainer").addEventListener("click",myLuckyappCore.sidebar.toggle);
+    sidebarContainer.addEventListener("click",myLuckyappCore.sidebar.toggle);
+    myLuckyappCore.sidebar.loadLinklist();
 } 

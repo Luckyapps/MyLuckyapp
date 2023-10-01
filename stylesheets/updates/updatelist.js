@@ -2,6 +2,13 @@ var updatelist_luckyapp = {
     "source": "Luckyapp",
     "content": [ 
         {
+            id: "dv.1.23101.0",
+            title: "myLuckyapp Update 1|okt23",
+            name:"",
+            date: "01.10.2023",
+            type: "UPDATE",
+            description: "<ul><li>Luckyapp_core <ul><li>Fileloader Funktionsaufruf Stabilität verbessert (verringerte Fehleranfälligkeit)</li></ul></li><li>Darkmode <ul><li>Fehler bei getAbsoluteLink behoben, der die Anzeige des Darkmode Toggle Bildes verhinderte</li></ul></li><li>Sidebar <ul><li>Sidebar Linklist ist jetzt Funktionsfähig.</li></ul></li><li>myLuckyappCore <ul><li>Moduleinstellungen hinzugefügt <ul><li>myLuckyappCore.getModuleSettings(moduleId) gibt die Einstellungen eines Moduls zurück</li><li>Mit myLuckyappCore.setModuleSettings(moduleId, key, value) kann der Wert einer Moduleinstellung geändert werden.</li><li>Die Einstellungen sind unter myLuckyappCore.settings.module[moduleId] und myLuckyappCore.modules[moduleId].settings verfügbar.</li></ul></li></ul></li><li>Home Card Rückseite z-index Bugfix</li><li>Fastlink Einstellungen <ul><li>Erster Entwurf</li><li>Es lässt sich auswählen, welche Links angezeigt werden sollen.</li></ul></li></ul>"
+        },{
             id: "dv.1.23092.0",
             title: "myLuckyapp Update 2|sep23",
             name:"",

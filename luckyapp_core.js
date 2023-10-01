@@ -142,11 +142,15 @@ var luckyapp_core = {
             files: page_config_init.modules.fileloader.files,
             exec_time:0,
             load: async function(funcname){
-                if(funcname!=""){
-                    window[funcname]();
-                    console.warn("[Luckyapp_core.modules.fileloader] '"+ funcname +"()' geladen.");
-                }else{
-                    console.warn("[Luckyapp_core.modules.fileloader] Kein Funktionsname verfügbar");
+                try{
+                    if(funcname!=""){
+                        window[funcname]();
+                        console.warn("[Luckyapp_core.modules.fileloader] '"+ funcname +"()' geladen.");
+                    }else{
+                        console.warn("[Luckyapp_core.modules.fileloader] Kein Funktionsname verfügbar");
+                    }
+                }catch(err){
+                    console.warn(`[Luckyapp_core.modules.fileloader] Eine Funktion (${funcname}) konnte nicht geladen werden.`);
                 }
             },
             start: async function(){
